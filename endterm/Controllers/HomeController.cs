@@ -1,21 +1,28 @@
 ﻿using System.Diagnostics;
+using endterm.Database;
 using Microsoft.AspNetCore.Mvc;
 using endterm.Models;
+using endterm.ViewModel.Post;
+using Microsoft.EntityFrameworkCore;
 
 namespace endterm.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly AppDbContext _db;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, AppDbContext db)
     {
         _logger = logger;
+        _db = db;
     }
 
     public IActionResult Index()
     {
-        return View();
+        var posts = _db.Posts.Include(p => p.User).ToList();
+        
+        return View(posts);
     }
 
     public IActionResult Privacy()

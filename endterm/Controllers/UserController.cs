@@ -47,7 +47,7 @@ public class UserController: Controller
         if (result.Succeeded)
         {
             await _signInManager.SignInAsync(user, false);
-            return RedirectToAction("Index", "Post", new { userId = user.Id });
+            return RedirectToAction("Index", "Home", new { userId = user.Id });
         }
 
         foreach (var error in result.Errors)

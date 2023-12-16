@@ -18,12 +18,6 @@ public class PostController: Controller
         _db = db;
         _userManager = userManager;
     }
-
-    public IActionResult Index()
-    {
-        return Ok();
-    }
-    
     
     [HttpGet]
     public IActionResult Add()
@@ -51,7 +45,7 @@ public class PostController: Controller
         await _db.Posts.AddAsync(post);
         await _db.SaveChangesAsync();
 
-        return RedirectToAction("Index", "Post");
+        return RedirectToAction("Index", "Home");
     }
     
     
@@ -90,7 +84,21 @@ public class PostController: Controller
         _db.Posts.Update(postDB);
         await _db.SaveChangesAsync();
 
-        return RedirectToAction("Index", "Post");
+        return RedirectToAction("Index", "Home");
+    }
+
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int postId)
+    {
+        var post = _db.Posts.FirstOrDefault(p => p.Id == postId);
+        if (post is null)
+            return NotFound();
+        
+        
+        _db.Posts.Remove(post);
+        await _db.SaveChangesAsync();
+        return RedirectToAction("Index", "Home");
     }
     
 }
