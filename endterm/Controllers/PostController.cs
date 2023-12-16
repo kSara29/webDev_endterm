@@ -55,4 +55,42 @@ public class PostController: Controller
     }
     
     
+    [HttpGet]
+    public async Task<IActionResult> Update(int id)
+    {
+        var post = _db.Posts.FirstOrDefault(p => p.Id == id);
+
+        var postUpdate = new PostUpdateVm()
+        {
+            Id = post.Id,
+            Text = post.Text,
+            Title = post.Title
+        };
+        
+        return View(postUpdate);
+    }
+
+
+    [HttpPost]
+    public async Task<IActionResult> Update(PostUpdateVm model, int postId)
+    {
+        if (!ModelState.IsValid)
+            return View();
+        
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null)
+            return NotFound();
+
+        var postDB = _db.Posts.FirstOrDefault(p => p.Id == postId);
+        
+        postDB.Text = model.Text;
+        postDB.Title = model.Title;
+
+
+        _db.Posts.Update(postDB);
+        await _db.SaveChangesAsync();
+
+        return RedirectToAction("Index", "Post");
+    }
+    
 }
