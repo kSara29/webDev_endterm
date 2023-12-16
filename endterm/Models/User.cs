@@ -6,12 +6,10 @@ public class User: IdentityUser
 {
     public User(
         string login,
-        string email,
-        string phoneNumber)
+        string email)
     {
         UserName = login;
         Email = email;
-        PhoneNumber = phoneNumber;
     }
     
     private User(){}

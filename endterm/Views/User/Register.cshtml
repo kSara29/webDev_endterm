@@ -1,0 +1,58 @@
+﻿@model endterm.ViewModel.User.UserRegisterVm
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Регистрация нового пользователя</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data" asp-controller="User" asp-action="Register">
+            <div asp-validation-summary="ModelOnly"></div>
+            
+            <div class="row mb-3">
+                <label asp-for="UserName" for="login" class="col-sm-2 col-form-label">Логин</label>
+                <div class="col">
+                    <input asp-for="UserName" type="text" class="form-control" id="login">
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label asp-for="Email" for="inputEmail3" class="col-sm-2 col-form-label">Адрес электронной почты</label>
+                <div class="col-sm-10">
+                    <input asp-for="Email" type="text" class="form-control" id="inputEmail3">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label asp-for="Password" for="inputPassword3" class="col-sm-2 col-form-label"> Пароль </label><br/>
+                <div class="col-sm-10">
+                    <input asp-for="Password" type="password" class="form-control" id="inputPassword3"/>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label asp-for="PasswordConfirm" for="inputPassword3" class="col-sm-2 col-form-label"> Повторите пароль</label><br/>
+                <div class="col-sm-10">
+                    <input asp-for="PasswordConfirm" type="password" class="form-control" id="inputPassword3"/>
+                    <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <button class="btn btn-dark">Зарегистрироваться</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
