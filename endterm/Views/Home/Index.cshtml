@@ -24,10 +24,15 @@
                     <td>@post.Text</td>
                     <td>@post.User.Email</td>
                     <td>
-                        <a class="btn btn-danger" 
-                                asp-controller="Post" 
-                                asp-action="Delete" 
-                                asp-route-postId="@post.Id">Delete
+                        <a class="btn btn-warning" 
+                           asp-controller="Post" 
+                           asp-action="Update" 
+                           asp-route-id="@post.Id">Update
+                        </a>
+                        <a class="btn btn-danger"
+                           asp-controller="Post"
+                           asp-action="Delete"
+                           asp-route-postId="@post.Id">Delete
                         </a>
                     </td>
                 </tr>
