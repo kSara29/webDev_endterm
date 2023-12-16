@@ -1,0 +1,29 @@
+﻿@model endterm.ViewModel.Post.PostUpdateVm
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Редактирование поста</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-controller="Post" asp-action="Add" method="post">
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Title" class="form-control" id="title">
+                <label asp-for="Title" for="title">Заголовок</label>
+            </div>
+
+            <div class="row mb-3">
+                <label asp-for="Text" for="description" class="form-label">Пост</label>
+                <textarea asp-for="Text" class="form-control" id="description" rows="3"></textarea>
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary"> Опубликовать </button>
+        </form>
+    </div>
+</div>

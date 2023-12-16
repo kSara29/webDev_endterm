@@ -11,13 +11,11 @@ public class Post
     public DateTime CreatedAt { get; init; }
 
     public Post(
-        int id, 
         string title,
         string text,
         string userId
         )
     {
-        Id = id;
         Title = title;
         Text = text;
         UserId = userId;
